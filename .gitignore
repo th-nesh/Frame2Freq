@@ -4,3 +4,4 @@ __pycache__/
 video_dataset/load_binary_internal.py
 *.pt
 *_env 
+scripts_internal

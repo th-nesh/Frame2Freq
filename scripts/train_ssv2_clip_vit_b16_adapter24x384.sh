@@ -1,17 +1,4 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=ssv2_ddp
-#SBATCH --output=job_name%j.%N.out
-#SBATCH --nodes=4
-#SBATCH --ntasks-per-node=4        # 4 GPUs per node = 8 tasks total
-#SBATCH --cpus-per-task=16         # adjust if needed
-#SBATCH --gres=gpu:4
-#SBATCH --time=00-07:00:00
-#SBATCH --mem=0
-#SBATCH --account=hk-project-pai00116
-#SBATCH --partition=accelerated    # HoreKa GPU partition
-
-echo "=== Activating environment ==="
-source /home/hk-project-pai00116/id_glh1237/st-adapter/st_adapter_env/bin/activate
 
 # -------------------------
 # Distributed environment setup
