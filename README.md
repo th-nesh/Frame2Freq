@@ -1,7 +1,7 @@
 # [CVPR 2026] Frame2Freq: Spectral Adapters for Fine-Grained Video Understanding
 
 
-This repo is the official implementation of [Frame2Freq: Spectral Adapters for Fine-Grained Video Understanding](https://openaccess.thecvf.com/content/CVPR2026/papers/Ponbagavathi_Frame2Freq_Spectral_Adapters_for_Fine-Grained_Video_Understanding_CVPR_2026_paper.pdf) at the IEEE/CVF Conference on Computer Vision and Pattern Recognition.
+This repo is the official implementation of [Frame2Freq: Spectral Adapters for Fine-Grained Video Understanding](https://openaccess.thecvf.com/content/CVPR2026/papers/Ponbagavathi_Frame2Freq_Spectral_Adapters_for_Fine-Grained_Video_Understanding_CVPR_2026_paper.pdf) at the IEEE/CVF Conference on Computer Vision and Pattern Recognition 2026, Denver, USA.
 
 ```
 @InProceedings{Ponbagavathi_2026_CVPR,
@@ -77,7 +77,29 @@ We use the CLIP checkpoints from the [official release](https://github.com/opena
 
 ## Run the models
 
-We provide some preset scripts in the [scripts/](scripts/) directory containing some recommended settings. For a detailed description of the comand line arguments see the help message of `main.py`.
+We provide some preset scripts in the [scripts/](scripts/) directory containing some recommended settings. For a detailed description of the command line arguments see the help message of `main.py`.
+
+The preset scripts use `--blr 0.002` with `--batch_size 8` per GPU on **16 GPUs**, which gives an effective learning rate of **0.001** (`1e-3`). If you train with a different number of GPUs, scale `--blr` so the effective learning rate stays at 0.001:
+
+```
+effective_lr = blr × batch_size × num_gpus / 256
+```
+
+For `--batch_size 8` and a target effective LR of 0.001:
+
+```
+blr = 0.032 / num_gpus
+```
+
+Examples:
+
+| GPUs | `--blr` | Effective LR |
+|------|---------|--------------|
+| 16   | 0.002   | 0.001        |
+| 8    | 0.004   | 0.001        |
+| 4    | 0.008   | 0.001        |
+
+Alternatively, set the learning rate directly with `--lr 0.001` to skip automatic scaling.
 
 
 ## Acknowledgements
